@@ -17,4 +17,7 @@ class Estado extends Model
     public function funcionario(){
         return $this->belongsTo(Funcionario::class);
     }
+    public function cidade(){
+        return $this->belongsTo(Cidade::class);
+    }
 }
