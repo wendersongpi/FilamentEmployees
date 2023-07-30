@@ -43,7 +43,7 @@ class CidadeResource extends Resource
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('nome')->sortable()->searchable(),
                 TextColumn::make('estado.nome')->sortable()->searchable(),
-                TextColumn::make('id')->sortable(),
+                TextColumn::make('created_at')->sortable()->label('Data de inserção'),
             ])
             ->filters([
                 //
