@@ -28,8 +28,8 @@ class PaisResource extends Resource
             ->schema([
               Card::make()
               ->schema([
-                 TextInput::make('cep'),
-                 TextInput::make('nome')
+                 TextInput::make('cep')->label('Sigla do País')->required(),
+                 TextInput::make('nome')->label('Nome do País')->required()
                 ])
             ]);
     }
@@ -39,7 +39,7 @@ class PaisResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->sortable(),
-                TextColumn::make('cep')->sortable()->searchable(),
+                TextColumn::make('cep')->label('Sigla do País')->sortable()->searchable(),
                 TextColumn::make('nome')->sortable()->searchable(),
                 TextColumn::make('created_at')->dateTime()
             ])

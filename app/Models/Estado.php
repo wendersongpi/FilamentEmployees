@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Estado extends Model
 {
     use HasFactory;
+    
+    protected $table = 'estados';
 
     protected $fillable = ['pais_id', 'nome'];
 
@@ -15,9 +17,9 @@ class Estado extends Model
         return $this->belongsTo(Pais::class);
     }
     public function funcionario(){
-        return $this->belongsTo(Funcionario::class);
+        return $this->hasMany(Funcionario::class);
     }
     public function cidade(){
-        return $this->belongsTo(Cidade::class);
+        return $this->hasMany(Cidade::class);
     }
 }

@@ -21,7 +21,7 @@ class CidadeResource extends Resource
 {
     protected static ?string $model = Cidade::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-home';
 
     public static function form(Form $form): Form
     {
