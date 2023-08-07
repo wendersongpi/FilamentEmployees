@@ -9,8 +9,12 @@ use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
+use Illuminate\Support\Facades\Hash;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Resources\Pages\CreateRecord;
+use Filament\Resources\Pages\Page;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserResource\RelationManagers;
@@ -36,13 +40,14 @@ class UserResource extends Resource
                      ->maxLength(255),
                     TextInput::make('password')
                      ->password()
-                     ->label('Senha')
+                     ->label('Senha') 
                      ->required(fn (Page $livewire): bool => $livewire instanceof CreateRecord)
                      ->minLength(8)
                      ->same('passwordConfirmation')
+                     ->dehydrated(fn ($state) => Hash::make($state))                     
                      ->dehydrateStateUsing(fn ($state) => Hash::make($state)),
                     TextInput::make('passwordConfirmation')
-                    ->password()
+                     ->password()
                      ->label('Confirmação de Senha')
                      ->required(fn (Page $livewire): bool => $livewire instanceof CreateRecord)
                      ->minLength(8)
@@ -55,7 +60,10 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('id')->label('Registro')->sortable(),
+                TextColumn::make('name')->label('Nome')->searchable(),
+                TextColumn::make('email')->label('Email')->sortable(),
+                TextColumn::make('created_at')->label('Criado em')->dateTime('d,m,Y'),
             ])
             ->filters([
                 //
